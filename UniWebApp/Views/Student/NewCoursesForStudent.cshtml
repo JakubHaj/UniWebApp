@@ -1,0 +1,58 @@
+﻿@model UniWebApp.Models.ViewModel.CoursesForStudentViewModel
+
+@{
+    ViewBag.Title = "NewCoursesForStudent";
+}
+@Html.Partial("_NavStudentBar", Model.student)
+
+@if (Model.Courses.Count() == 0)
+{
+    <h2>Brak kursów!</h2>
+    <h3>Stwórz kursy jako Admin</h3>
+}
+else
+{
+    using (Html.BeginForm("Save", "Course"))
+    {
+        @Html.ValidationSummary()
+
+
+        <div class="container">
+
+            <div class="row">
+                <h2> Zapisz się na interesujące Cie zajęcia </h2>
+            </div>
+
+            @foreach (var kurs in Model.Courses)
+            {
+                <div class="row">
+                    <div class="form-group">
+                        <div class="items col-xs-5 col-sm-5 col-md-3 col-lg-3">
+                            <div class="info-block block-info clearfix">
+                                <div data-toggle="buttons" class="btn-group bizmoduleselect">
+                                    <label class="btn btn-default">
+                                        <div class="bizcontent">
+                                            <input class="form-control" id="kurs" type="checkbox" name="zajeciaId" autocomplete="off" value=@kurs.Id>
+                                            <span></span>
+                                            <h5>@kurs.Name</h5>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            }
+            @{
+                var studentId = Model.student.Id;
+
+                @Html.HiddenFor(s => studentId);
+            }
+            <div class="logowanie">
+                @Html.AntiForgeryToken()
+                <button type="submit" class="btn btn-primary">Zapisz</button>
+            </div>
+        </div>
+                    }
+                }

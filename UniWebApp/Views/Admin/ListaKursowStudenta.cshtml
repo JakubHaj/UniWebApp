@@ -1,0 +1,45 @@
+﻿@model UniWebApp.Models.Student
+@{
+    ViewBag.Title = "ListaKursowStudenta";
+}
+
+@Html.Partial("_AdminNavBar")
+
+@if (Model.Courses.Count != 0)
+{
+    <h2>Zajęcia studenta: @Model.Name</h2>
+
+    int liczba = 1;
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Zajęcia</th>
+                <th></th>
+            </tr>
+        </thead>
+
+        @foreach (var kurs in Model.Courses)
+        {
+
+            <tbody>
+                <tr>
+                    <th scope="row">@liczba</th>
+                    <th>@kurs.Name</th>
+                    <th><a href="@Url.Action("Delete", "Course", new { kursId = kurs.Id, stId = Model.Id})"> 
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></th>
+                </tr>
+                @{ liczba = liczba + 1;}
+            </tbody>
+
+                    }
+    </table>
+}
+
+else
+{
+<h3>Student nie zapisał się na żadne zajęcia.</h3>
+}
+
+@Html.ActionLink("Delete Student", "Delete", "Student", new { studentId = Model.Id }, new { @class= "btn btn-primary btn-lg active"})

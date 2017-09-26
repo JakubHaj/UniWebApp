@@ -1,0 +1,53 @@
+﻿@model UniWebApp.Models.ViewModel.StudentDropDownListModel
+
+@{
+    ViewBag.Title = "LoginAs";
+}
+@Html.Partial("_HomeNavBar")
+
+@if (Model.Students.Count() == 0)
+{
+    <div id="pole">
+        <div class="logowanie">
+            <h2>Stwórz studentów jako Admin!</h2>
+        </div>
+    </div>
+}
+else
+{
+<div id="pole">
+    <div class="logowanie">
+        <h2>Zaloguj się jako:</h2>
+    </div>
+
+    @using (@Html.BeginForm("HomeStudent", "Student"))
+    {
+        @Html.ValidationSummary()
+
+        <div class="logowanie">
+            @Html.DropDownListFor(s => s.MyStudentsId, new SelectList(Model.Students, "Id", "Name"), "Zaloguj się jako:", new { @class = "form-control" })
+        </div>
+
+        <div class="logowanie">
+            @Html.AntiForgeryToken()
+            <button type="submit" class="btn btn-primary">Zaloguj</button>
+        </div>
+    }
+</div>
+}
+<style>
+    #pole {
+        display: flex; /* establish flex container */
+        flex-direction: column; /* make main axis vertical */
+        justify-content: center; /* center items vertically, in this case */
+        align-items: center; /* center items horizontally, in this case */
+        height: 300px;
+    }
+
+    .logowanie {
+        width: 300px;
+        margin: 5px;
+        text-align: center; /* will center text in <p>
+    , which is not a flex item */
+    }
+</style>

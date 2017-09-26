@@ -1,0 +1,39 @@
+﻿@model IEnumerable<UniWebApp.Models.Course>
+@{
+    ViewBag.Title = "ListaKursow";
+}
+
+@Html.Partial("_AdminNavBar")
+
+<h2>Lista kursów</h2>
+
+@{int liczba = 1;}
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Kursy</th>
+            <th></th>
+        </tr>
+    </thead>
+
+    @foreach (var kurs in Model)
+    {
+
+        <tbody>
+            <tr>
+                <th scope="row">@liczba</th>
+                <th>@kurs.Name</th>
+                <th>
+                    <a href="@Url.Action("Remove", "Course", new { kursId = kurs.Id})">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                    </a>
+                </th>
+            </tr>
+            @{ liczba = liczba + 1;}
+        </tbody>
+
+                }
+</table>
+

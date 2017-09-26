@@ -1,0 +1,43 @@
+﻿@model UniWebApp.Models.Student
+
+
+<body>
+    <div>
+        <br />
+        @if (Model != null)
+        {
+            @Html.Label("Jesteś zalogowany jako: " + Model.Name, new { @class = "pmtallocated pull-right", @style = "text-align:right" })
+        }
+        else
+        {
+            @Html.Label("Jesteś zalogowany jako: student nie został wybrany!", new { @class = "pmtallocated pull-right", @style = "text-align:right" })
+        }
+    </div>
+</body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <button type="button" id="Dom" class="btn btn-default"><a href="/"><span class="glyphicon glyphicon-home"></span></a></button>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Zajęcia<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li>@Html.ActionLink("Zapisy", "NewCoursesForStudent", "Student", Model, null)</li>
+                        <li>@Html.ActionLink("Moje zajęcia", "ListaZajec", "Student", Model, null)</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

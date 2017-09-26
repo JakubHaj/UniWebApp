@@ -1,0 +1,33 @@
+﻿@model UniWebApp.Models.Student
+@{
+    ViewBag.Title = "ListaZajec";
+}
+@Html.Partial("_NavStudentBar", Model)
+
+<h2>Zajęcia</h2>
+
+@{int liczba = 1;}
+
+
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Zajęcia</th>
+        </tr>
+    </thead>
+
+    @foreach (var kurs in Model.Courses)
+    {
+
+        <tbody>
+            <tr>
+                <th scope="row">@liczba</th>
+                <th>@kurs.Name</th>
+            </tr>
+            @{ liczba = liczba + 1;}
+        </tbody>
+
+                }
+</table>

@@ -1,0 +1,27 @@
+﻿@model UniWebApp.Models.Course
+@{
+    ViewBag.Title = "DodajKurs";
+}
+
+@Html.Partial("_AdminNavBar")
+
+<h2>DodajKurs</h2>
+
+@using (Html.BeginForm("SaveCourse", "Admin"))
+{
+    <div class="form-group">
+        <h4>Podaj nazwę kursu:</h4>
+        @Html.TextBoxFor(c => c.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(c => c.Name, null, new { Style = "color:red" })
+    </div>
+
+    @Html.HiddenFor(c => c.Id)
+    @Html.AntiForgeryToken()
+
+    <button type="submit" class="btn btn-primary">Zapisz</button> 
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}

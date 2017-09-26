@@ -1,30 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using UniWebApp.Models;
+using UniWebApp.Models.ViewModel;
 
 namespace UniWebApp.Controllers
 {
     public class HomeController : Controller
     {
+        private AppDbContext _context;
+
+        public HomeController()
+        {
+            _context = new AppDbContext();
+        }
         public ActionResult Index()
         {
-            return View();
+            var studenci = _context.Students.Include(c => c.Courses).ToList();
+
+            return View(studenci);
         }
 
-        public ActionResult About()
+        public ActionResult LoginAs()
         {
-            ViewBag.Message = "Your application description page.";
+            var listaStudentow = _context.Students.ToList();
 
-            return View();
-        }
+            var listaStudentowModel = new StudentDropDownListModel
+            {
+                Students = listaStudentow
+            };
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            return View(listaStudentowModel);
         }
     }
 }

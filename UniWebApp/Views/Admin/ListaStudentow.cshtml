@@ -1,0 +1,34 @@
+﻿@model IEnumerable<UniWebApp.Models.Student>
+@{
+    ViewBag.Title = "ListaStudentow";
+}
+
+@Html.Partial("_AdminNavBar")
+
+<h2>ListaStudentow</h2>
+
+@{int liczba = 1;}
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Studenci</th>
+        </tr>
+    </thead>
+
+    @foreach (var student in Model)
+    {
+
+        <tbody>
+            <tr>
+                <th scope="row">@liczba</th>
+                <th>@Html.ActionLink(@student.Name, "ListaKursowStudenta", "Admin", new { studentId = student.Id }, null)</th>
+            </tr>
+            
+            @{ liczba = liczba + 1;}
+        </tbody>
+
+                }
+</table>
+
